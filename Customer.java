@@ -26,11 +26,11 @@ public class Customer {
 		this.email = email;
 	}
 
-	public AtomicInteger getCustCount() {
+	public static AtomicInteger getCustCount() {
 		return custCount;
 	}
-	public void setCustCount(AtomicInteger custCount) {
-		this.custCount = custCount;
+	public static void setCustCount(AtomicInteger custCount) {
+		Customer.custCount = custCount;
 	}
 	
 	public int getCustID() {
