@@ -32,11 +32,11 @@ public class Accommodation {
 		this.available = available;
 	}
 	
-	public AtomicInteger getAccomCount() {
+	public static AtomicInteger getAccomCount() {
 		return accomCount;
 	}
-	public void setAccomCount(AtomicInteger accomCount) {
-		this.accomCount = accomCount;
+	public static void setAccomCount(AtomicInteger accomCount) {
+		Accommodation.accomCount = accomCount;
 	}
 
 	public int getAccomID() {

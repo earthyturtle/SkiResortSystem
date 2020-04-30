@@ -204,6 +204,33 @@ public class MtBullerResort {
 	    }
 	}
 	
+	public double showAccomPriceByID(int id) {
+		for (Accommodation a:accommodations) {
+			if (a.getAccomID() == id) {
+				return a.getDailyCost();
+			}
+	    }
+		return 0;
+	}
+	
+	public String showAccomName(int id) {;
+		for (Accommodation a:accommodations) {
+			if (a.getAccomID() == id) {
+				return a.getName();
+			}
+	    }
+		return null;
+	}
+	
+	public String showCustName(int id) {;
+		for (Customer a:customers) {
+			if (a.getCustID() == id) {
+				return a.getFname() + ", " + a.getLname();
+			}
+	    }
+		return null;
+	}
+	
 	public void addCustomer() {
 		boolean check = false;
 		System.out.print("What is the customer's first name? ");
@@ -283,6 +310,17 @@ public class MtBullerResort {
 		}
 	}
 	
+	public experience showCustExperience(int id) {
+		experience exp = experience.BEGINNER;
+		for (Customer c:customers) {
+			if (c.getCustID() == id) {
+				exp = c.getExperience();
+				break;
+			}
+	    }
+		return exp;
+	}
+	
 	public void addPackage() {
 		boolean check = false;
 		int custID = 0;
@@ -297,6 +335,7 @@ public class MtBullerResort {
 			    int selection = input.nextInt();
 			    for (Customer c: customers) {
 		             if (c.getCustID() == selection) {
+		            	 custID = selection;
 		            	 check = true;
 		            	 break;
 		             }
@@ -344,7 +383,7 @@ public class MtBullerResort {
 				System.out.println("  !- ERROR: invalid input or format, follow the YYYY-MM-DD including any leading 0's. -!");
 			}
 		} while (check == false);
-		travelPackages.add(new TravelPackage(custID, accomID, arrival, departure));
+		travelPackages.add(new TravelPackage(custID, showCustExperience(custID), accomID, showCustName(custID), showAccomName(accomID), showAccomPriceByID(accomID), arrival, departure));
 		System.out.println("New package created.");
 	}
 	
@@ -416,7 +455,7 @@ public class MtBullerResort {
 				for (TravelPackage p:travelPackages) {
 					if(p.getPackID() == selection) {
 						try {
-							System.out.println("How many lessons would the customer like to book for?");
+							System.out.println("How many lessons would the customer like to book for (Beginners $25, Intermediates $20, Experts $15, per lesson)?");
 							clearScanner();
 							p.setLessons(input.nextInt());
 							check = true;
