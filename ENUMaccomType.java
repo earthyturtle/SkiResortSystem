@@ -1,4 +1,4 @@
-package mtbuller;
+package SkiResort;
 
 public enum ENUMaccomType {
 	HOTEL {

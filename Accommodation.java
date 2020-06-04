@@ -1,4 +1,4 @@
-package mtbuller;
+package SkiResort;
 
 import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;

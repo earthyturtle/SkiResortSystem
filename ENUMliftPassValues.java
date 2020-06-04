@@ -1,4 +1,4 @@
-package mtbuller;
+package SkiResort;
 
 /*
  * I did a lot of research into the power of enumerable variables and fell in love with their versatility, stability and functionality.
