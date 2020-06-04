@@ -1,22 +1,26 @@
 package mtbuller;
 
+import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Customer {
-    static AtomicInteger custCount = new AtomicInteger(0);
+public class Customer implements Serializable {
+	private static final long serialVersionUID = 867271506549177216L;
+	static AtomicInteger custCount = new AtomicInteger(0);
 	private int custID;
 	private String fname;
 	private String lname;
 	private byte age;
-	private experience experience;
+	private ENUMexperience experience;
 	private String phone;
 	private String email;
+	
+	// Constructors
 	
 	public Customer() {
 		custID = custCount.incrementAndGet();
 	}
 	
-	public Customer(String fname, String lname, byte age, experience experience, String phone, String email) {
+	public Customer(String fname, String lname, byte age, ENUMexperience experience, String phone, String email) {
 		custID = custCount.incrementAndGet();
 		this.fname = fname;
 		this.lname = lname;
@@ -25,13 +29,8 @@ public class Customer {
 		this.phone = phone;
 		this.email = email;
 	}
-
-	public static AtomicInteger getCustCount() {
-		return custCount;
-	}
-	public static void setCustCount(AtomicInteger custCount) {
-		Customer.custCount = custCount;
-	}
+	
+	// Getters
 	
 	public int getCustID() {
 		return custID;
@@ -45,7 +44,7 @@ public class Customer {
 	public byte getAge() {
 		return age;
 	}
-	public experience getExperience() {
+	public ENUMexperience getExperience() {
 		return experience;
 	}
 	public String getPhone() {
@@ -55,6 +54,8 @@ public class Customer {
 		return email;
 	}
 
+	// Setters
+	
 	public void setFname(String fname) {
 		this.fname = fname;
 	}
@@ -64,7 +65,7 @@ public class Customer {
 	public void setAge(byte age) {
 		this.age = age;
 	}
-	public void setExperience(experience experience) {
+	public void setExperience(ENUMexperience experience) {
 		this.experience = experience;
 	}
 	public void setPhone(String phone) {
@@ -74,18 +75,23 @@ public class Customer {
 		this.email = email;
 	}
 
+	// Strings
+	
 	@Override
 	public String toString() {
-		return custID + ". " + fname + ", " + lname + "\n     " + age + " years old | " + experience + " ski experience\n     Ph: " + phone + " | Em: " + email;
-	}
-	public String toAbbString() {
-		return custID + ". " + fname + ", " + lname;
+		return "<html>" + custID + ") " + fname + ", " + lname + " - " + age + " years old<br />" 
+				+ "Skiing Experience: " + experience.lowerCase()
+				+ "<br />Ph: " + phone + " | Em: " + email
+				+ "<br />........................................................................................................</html>";
 	}
 
-	enum experience {
-		BEGINNER,
-		INTERMEDIATE,
-		EXPERT
+	// Non-Object functions
+	
+	public static AtomicInteger getCustCount() {
+		return custCount;
+	}
+	public static void setCustCount(AtomicInteger custCount) {
+		Customer.custCount = custCount;
 	}
 }
 

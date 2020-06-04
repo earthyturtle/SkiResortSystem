@@ -1,13 +1,16 @@
 package mtbuller;
 
+import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Accommodation {
-    static AtomicInteger accomCount = new AtomicInteger(0);
+
+public class Accommodation implements Serializable {
+	private static final long serialVersionUID = -6546186345992026980L;
+	static AtomicInteger accomCount = new AtomicInteger(0);
 	private int accomID;
 	private String name;
 	private String description;
-	private accomType type;
+	private ENUMaccomType type;
 	private double dailyCost;
 	private boolean onMount;
 	private boolean snow;
@@ -15,11 +18,13 @@ public class Accommodation {
 	private boolean internet;
 	private boolean available;
 	
+	// Constructors
+	
 	public Accommodation() {
 		accomID = accomCount.incrementAndGet();
 	}
 	
-	public Accommodation(String name, String description, accomType type, double dailyCost, boolean onMount, boolean snow, boolean kidsFree, boolean internet, boolean available) {
+	public Accommodation(String name, String description, ENUMaccomType type, double dailyCost, boolean onMount, boolean snow, boolean kidsFree, boolean internet) {
 		accomID = accomCount.incrementAndGet();
 		this.name = name;
 		this.description = description;
@@ -29,16 +34,11 @@ public class Accommodation {
 		this.snow = snow;
 		this.kidsFree = kidsFree;
 		this.internet = internet;
-		this.available = available;
-	}
-	
-	public static AtomicInteger getAccomCount() {
-		return accomCount;
-	}
-	public static void setAccomCount(AtomicInteger accomCount) {
-		Accommodation.accomCount = accomCount;
+		this.available = true;
 	}
 
+	// Getters
+	
 	public int getAccomID() {
 		return accomID;
 	}
@@ -48,7 +48,7 @@ public class Accommodation {
 	public String getDescription() {
 		return description;
 	}
-	public accomType getType() {
+	public ENUMaccomType getType() {
 		return type;
 	}
 	public double getDailyCost() {
@@ -70,13 +70,15 @@ public class Accommodation {
 		return available;
 	}
 	
+	// Setters
+	
 	public void setName(String name) {
 		this.name = name;
 	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public void setType(accomType type) {
+	public void setType(ENUMaccomType type) {
 		this.type = type;
 	}
 	public void setDailyCost(double dailyCost) {
@@ -98,12 +100,28 @@ public class Accommodation {
 		this.available = available;
 	}
 
+	// String
+	
 	@Override
 	public String toString() {
-		return accomID + ". " + name + " - " + type + " - $" + dailyCost + " per Night\n     " + description + "\n     On the Mountain? " + yesno(onMount) + " | Snow Guaranteed? " + yesno(snow) + " | Kids Stay Free? " + yesno(kidsFree) + " | Internet? " + yesno(internet) + " | Availablle Now? " + yesno(available);
+		return "<html>" + accomID + ") " + name + " - " + type.lowerCase() + " - $" + dailyCost + " per Night" + "<br />"
+				+ "\"" + description + "\"<br />" 
+				+ "On Mountain? " + yesno(onMount) + " | Snow Guarantee? " + yesno(snow) + " | Kids Stay Free? " + yesno(kidsFree) + " | Internet? " + yesno(internet)
+				+ Available(available) + "<br />........................................................................................................</html>";
 	}
 	
-	public String  yesno(boolean bool) {
+	// Non-Object Methods
+	
+	public static AtomicInteger getAccomCount() {
+		return accomCount;
+	}
+	public static void setAccomCount(AtomicInteger accomCount) {
+		Accommodation.accomCount = accomCount;
+	}
+	
+	// Object Methods
+	
+	private String yesno (boolean bool) {
 		if (bool == true)
 		{
 		return "Yes";
@@ -113,10 +131,14 @@ public class Accommodation {
 		return "No";
 		}
 	}
-	
-	enum accomType {
-		HOTEL,
-		LODGE,
-		APARTMENT
+	private String Available (boolean bool) {
+		if (bool == true)
+		{
+		return "<br /> Available";
+		}
+		else
+		{
+		return null;
+		}
 	}
 }
