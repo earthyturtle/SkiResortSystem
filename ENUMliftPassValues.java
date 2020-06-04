@@ -1,11 +1,5 @@
 package SkiResort;
 
-/*
- * I did a lot of research into the power of enumerable variables and fell in love with their versatility, stability and functionality.
- * I wanted to fully utilise them to the best of my abilities in this assessment, Honestly I am seeing so many practical uses for them and regret not
- * using them in this fashion sooner. 
- */
-
 public enum ENUMliftPassValues {
 	NOPASS(0) {
 		@Override

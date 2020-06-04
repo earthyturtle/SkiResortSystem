@@ -35,16 +35,16 @@ public class SkiResortDatabase {
 		arrayPack = new ArrayList<TravelPackage>();
 	}
 	
-	public void loadDatabase() { // The database will actually load any previous files from it's last session on start-up, letting users continue their work.
+	public void loadDatabase() {
 		boolean accomLoad = false;
 		boolean custLoad = false;
 		boolean packLoad = false;
 		boolean accomReload = false;
 		boolean custReload = false;
 		boolean packReload = false;
-		System.out.println("Initiating: Loading Database..."); // I am decidedly using the print function to help developers using console debug or identify issues within the code. Once exported, this console won't be visible without special permissions.
+		System.out.println("Initiating: Loading Database..."); 
 		try{
-			fileIn = new FileInputStream("accommodations.dat"); // I have added save/load functions for all 3 lists. 
+			fileIn = new FileInputStream("accommodations.dat");
 			objectIn = new ObjectInputStream(fileIn);
 			while (true) {
 			    try {
@@ -62,7 +62,7 @@ public class SkiResortDatabase {
 			    }
 			}
 		}
-		catch (FileNotFoundException e){ // in the event this is the 'first time' loading, the database will create the files and default objects needed.
+		catch (FileNotFoundException e){ 
 			Accommodation[] accommodations = defaultAccommodations();
 			for(int a = 0; a < accommodations.length; a++) {
 				arrayAccom.add(accommodations[a]);
@@ -72,7 +72,7 @@ public class SkiResortDatabase {
 			System.out.println("Missing file: Generating default Accommodation list.");
 			accomReload = true;
 		}
-		catch (InvalidClassException e){ // A fail-safe, in-case the file in question becomes corrupt or is from a different version. The program automatically re-writes it.
+		catch (InvalidClassException e){
 			Accommodation[] accommodations = defaultAccommodations();
 			for(int a = 0; a < accommodations.length; a++) {
 				arrayAccom.add(accommodations[a]);
@@ -82,7 +82,7 @@ public class SkiResortDatabase {
 			System.out.println("Corrupt file: Rebuilding Accommodation file.");
 			accomReload = true;
 		}
-		catch (Exception e){ // for any other errors, this system is designed to explain the error occurring and leave it to a developer to find a fix.
+		catch (Exception e){ 
 			e.printStackTrace();
 			System.out.println("Unexpected Error: Accommodation Arraylist could not be loaded.");
 			accomReload = true;
@@ -233,7 +233,7 @@ public class SkiResortDatabase {
 		}
 	}
     
-	public void saveAccommodations(boolean report) { // To recycle code I am using a simple boolean to return whether or not the save function needs to return a report on it's actions.
+	public void saveAccommodations(boolean report) { 
 		if (report) {
 			System.out.println("Initiating: Attempting Accommodations save...");
 		}
@@ -405,7 +405,7 @@ public class SkiResortDatabase {
 	
 	// Erasing Files Functions
 	
-	public void eraseAccommodationsFile() { // A little bit extra, if you need to check and see if some of the fail-safes work I included an erase file option.
+	public void eraseAccommodationsFile() { 
 		try {         
 			File f = new File("accommodations.dat");
 			f.delete();
